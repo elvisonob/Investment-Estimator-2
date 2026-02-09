@@ -4,6 +4,6 @@ import App from './App';
 
 test('access landing page', () => {
   render(<App />);
-  const title = screen.getByText('Hi tere!');
+  const title = screen.getByText('Hi there!');
   expect(title).toBeInTheDocument();
 });
