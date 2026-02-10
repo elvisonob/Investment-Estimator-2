@@ -1,5 +1,13 @@
+import AmountData from './components/AmountData.tsx';
+import Summation from './components/Summation.tsx';
+
 function App() {
-  return <h1>Hi there!</h1>;
+  return (
+    <div>
+      <AmountData />
+      <Summation />
+    </div>
+  );
 }
 
 export default App;
