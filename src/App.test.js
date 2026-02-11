@@ -4,6 +4,10 @@ import App from './App';
 
 test('access landing page', () => {
   render(<App />);
-  const title = screen.getByText('Hi there!');
-  expect(title).toBeInTheDocument();
+  const startAmount = screen.getByText(/starting Amount/i);
+  const returnRate = screen.getByText(/return rate/i);
+  const duration = screen.getByText(/duration/i);
+  expect(startAmount).toBeInTheDocument();
+  expect(returnRate).toBeInTheDocument();
+  expect(duration).toBeInTheDocument();
 });

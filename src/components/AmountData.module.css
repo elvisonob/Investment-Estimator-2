@@ -9,4 +9,6 @@ button {
     grid-column: 1 / -1;
     justify-self: center;
     padding: 10px;
+    background-color: blue;
+    color: white;
 }
