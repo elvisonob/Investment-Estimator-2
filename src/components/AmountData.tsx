@@ -1,9 +1,7 @@
 import classes from './AmountData.module.css';
 import { ReactEventHandler, useState } from 'react';
 
-function AmountData() {
-  // take all the inputs
-  // Let me ignore monthly deposits for now
+function AmountData(props) {
   const [startingAmount, setStartingAmount] = useState<string>('');
   const [duration, setDuration] = useState<string>('');
 
@@ -15,15 +13,27 @@ function AmountData() {
     setDuration(e.target.value);
   };
 
-  function calculateAmount(e: React.SubmitEvent<HTMLInputElement>) {
+  function calculateFutureValue(
+    startingAmount: number,
+    duration: number,
+  ): number {
+    return startingAmount * (1 + 0.07) ** duration;
+  }
+
+  function calculation(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(startingAmount);
-    console.log(duration);
+    const finalAmount = calculateFutureValue(
+      Number(startingAmount),
+      Number(duration),
+    );
+
+    //Move the calculated amount to App file and then Summation
+    props.onCalculate(finalAmount);
   }
 
   return (
     <div className={classes.container}>
-      <form>
+      <form onSubmit={calculation}>
         <label>Starting Amount</label>
         <input
           type="number"
@@ -31,10 +41,8 @@ function AmountData() {
           value={startingAmount}
           onChange={handleAmount}
         />
-        {/* <label>Monthly Deposit</label>
-        <input type="text" id="text" /> */}
         <label>Return rate</label>
-        <input type="text" id="text" value="7%" />
+        <input type="text" id="text" defaultValue="7%" />
         <label>Duration</label>
         <input
           type="number"
@@ -42,7 +50,7 @@ function AmountData() {
           value={duration}
           onChange={handleDuration}
         />
-        <button onClick={calculateAmount}>Calculate</button>
+        <button type="submit">Calculate</button>
       </form>
     </div>
   );
