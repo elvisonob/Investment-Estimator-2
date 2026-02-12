@@ -5,10 +5,11 @@ import './App.css';
 
 function App() {
   const [finalAmount, setFinalAmount] = useState<number | null>(null);
+
   return (
     <div className="layout">
       <AmountData onCalculate={setFinalAmount} />
-      <Summation summaryAmount={finalAmount} />
+      {finalAmount && <Summation summaryAmount={finalAmount} />}
     </div>
   );
 }

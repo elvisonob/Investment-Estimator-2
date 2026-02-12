@@ -1,9 +1,14 @@
 import classes from './AmountData.module.css';
-import { ReactEventHandler, useState } from 'react';
+import { useState } from 'react';
 
-function AmountData(props) {
+type AmountProps = {
+  onCalculate: (value: number) => void;
+};
+
+function AmountData({ onCalculate }: AmountProps) {
   const [startingAmount, setStartingAmount] = useState<string>('');
   const [duration, setDuration] = useState<string>('');
+  const [inputValidation, setInputValidation] = useState<boolean>(false);
 
   const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStartingAmount(e.target.value);
@@ -22,13 +27,22 @@ function AmountData(props) {
 
   function calculation(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (startingAmount === '' || duration === '') {
+      setInputValidation(true);
+      return;
+    }
+
+    setInputValidation(false);
+
     const finalAmount = calculateFutureValue(
       Number(startingAmount),
       Number(duration),
     );
 
-    //Move the calculated amount to App file and then Summation
-    props.onCalculate(finalAmount);
+    // if no starting amount, if no duration, calculate button will throw an error 'Please include the required field'
+
+    onCalculate(finalAmount);
   }
 
   return (
@@ -50,6 +64,7 @@ function AmountData(props) {
           value={duration}
           onChange={handleDuration}
         />
+        {inputValidation && <p>Please fill all field*</p>}
         <button type="submit">Calculate</button>
       </form>
     </div>

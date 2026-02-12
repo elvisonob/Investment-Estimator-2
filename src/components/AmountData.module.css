@@ -12,3 +12,38 @@ button {
     background-color: blue;
     color: white;
 }
+
+label {
+    font-size: x-large;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 3px solid black;
+    border-radius: 6px;
+}
+
+p {
+    color: red;
+    font-weight: bold;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4f46e5;
+}
+
+button {
+    font-size: 1.5rem;
+    width: 50%;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    cursor: pointer;
+    color: red;
+    transform: translateY(-2px);
+}

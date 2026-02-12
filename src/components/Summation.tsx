@@ -1,12 +1,17 @@
 import classes from './Summation.module.css';
 
-function Summation(props) {
+type SummationProps = {
+  summaryAmount: number | null;
+};
+function Summation({ summaryAmount }: SummationProps) {
   return (
     <div className={classes.summation}>
       <h3>Results</h3>
       <dl className={classes.amountSummary}>
         <dt>End Balance</dt>
-        <dd>{props.summaryAmount}</dd>
+        <dd className={classes.endBalance}>
+          £{summaryAmount?.toLocaleString()}
+        </dd>
         <dt>Total Contributions</dt>
         <dd>£120,000</dd>
         <dt>Total Interest</dt>
